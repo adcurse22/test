@@ -49,3 +49,24 @@ shell
 
    ```shell
    git clone https://github.com/adcurse22/advert-management.git
+
+
+   python -m venv venv
+source venv/bin/activate   Для Unix/Linux
+venv\Scripts\activate  Для Windows
+
+Установите зависимости:
+
+
+
+pip install -r requirements.txt
+
+Запустите миграции:
+
+
+
+python manage.py migrate
+
+Запустите сервер разработки:
+
+python manage.py runserver
