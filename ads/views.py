@@ -2,7 +2,7 @@ from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from .models import City, Category, Advert
 from .serializers import CitySerializer, CategorySerializer, AdvertSerializer
-from django.db.models import Prefetch
+from django.db.models import F
 
 class CityListView(ListAPIView):
     queryset = City.objects.only('name')
@@ -32,8 +32,7 @@ class AdvertDetailView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.views += 1
+        instance.views = F('views') + 1
         instance.save()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-    
